@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vinícius Florêncio — Corretor de Imóveis</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+:root{
+  --cream:#F8F5F0;
+  --white:#FDFCFB;
+  --gold:#B8955A;
+  --dark:#181614;
+  --mid:#6B6560;
+  --line:#E2DDD7;
+}
+body{background:var(--white);color:var(--dark);font-family:'Montserrat',sans-serif;font-weight:300;overflow-x:hidden;cursor:none}
+
+/* cursor */
+.c{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+.cr{position:fixed;width:30px;height:30px;border:1px solid var(--gold);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.5;transition:width .3s,height .3s,opacity .3s}
+
+/* nav */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:32px 64px;display:flex;align-items:center;justify-content:space-between;transition:all .4s}
+nav.s{background:rgba(253,252,251,.95);backdrop-filter:blur(10px);padding:20px 64px;border-bottom:1px solid var(--line)}
+.nl{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:400;letter-spacing:.12em;color:#fff;text-decoration:none;transition:color .4s}
+nav.s .nl{color:var(--dark)}
+.nc{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(255,255,255,.7);text-decoration:none;border-bottom:1px solid rgba(255,255,255,.3);padding-bottom:2px;transition:all .4s}
+nav.s .nc{color:var(--gold);border-color:var(--gold)}
+
+/* hero */
+.hero{position:relative;height:100vh;min-height:600px;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden}
+.hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.hero-veil{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(24,22,20,.2) 0%,rgba(24,22,20,.05) 45%,rgba(24,22,20,.72) 100%)}
+.hero-body{position:relative;z-index:2;padding:0 64px 72px;opacity:0;animation:up 1s ease .4s forwards}
+.eyebrow{font-size:.58rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;line-height:1.1;color:#fff}
+.hero h1 em{font-style:italic;color:rgba(255,255,255,.75)}
+
+/* strip */
+.strip{background:var(--dark);padding:13px 0;overflow:hidden}
+.strip-track{display:flex;animation:marquee 18s linear infinite;white-space:nowrap}
+.strip-item{font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:#5A5550;padding:0 36px;flex-shrink:0}
+.strip-item::after{content:'·';margin-left:36px;color:var(--gold)}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* grid layout */
+.grid2{display:grid;grid-template-columns:1fr 1fr}
+
+/* about */
+.about{min-height:80vh}
+.about-img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform .7s ease}
+.about-img:hover{transform:scale(1.03)}
+.about-copy{padding:80px 64px;display:flex;flex-direction:column;justify-content:center;background:var(--cream)}
+.label{font-size:.56rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gold);margin-bottom:36px;display:flex;align-items:center;gap:14px}
+.label::before{content:'';width:24px;height:1px;background:var(--gold);display:block}
+.about-copy h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,2.8vw,2.8rem);font-weight:300;line-height:1.2;margin-bottom:32px}
+.about-copy h2 em{font-style:italic;color:var(--gold)}
+.about-copy p{font-size:.78rem;line-height:1.95;color:var(--mid);max-width:400px}
+.stats{display:flex;gap:0;margin-top:52px;border-top:1px solid var(--line);padding-top:40px}
+.stat{flex:1;padding-right:24px}
+.stat+.stat{padding-left:24px;border-left:1px solid var(--line)}
+.sn{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:300;color:var(--gold);line-height:1}
+.sl{font-size:.56rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mid);margin-top:4px;line-height:1.6}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;height:600px;gap:2px}
+.gcard{position:relative;overflow:hidden}
+.gcard:first-child{grid-row:1/3}
+.gcard img{width:100%;height:100%;object-fit:cover;transition:transform .7s cubic-bezier(.25,.46,.45,.94);display:block}
+.gcard:hover img{transform:scale(1.06)}
+.gtag{position:absolute;bottom:20px;left:20px;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.8);background:rgba(24,22,20,.5);backdrop-filter:blur(6px);padding:6px 14px;opacity:0;transform:translateY(8px);transition:all .35s}
+.gcard:hover .gtag{opacity:1;transform:translateY(0)}
+
+/* dark section */
+.dark{background:var(--dark)}
+.dark .label{color:rgba(184,149,90,.8)}
+.dark .label::before{background:rgba(184,149,90,.6)}
+
+/* quote */
+.quote-wrap{padding:120px 64px;background:var(--cream);text-align:center}
+.quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.6rem,2.5vw,2.4rem);font-weight:300;font-style:italic;line-height:1.55;color:var(--dark);max-width:680px;margin:0 auto 32px}
+.orn{display:flex;align-items:center;gap:18px;justify-content:center;margin:0 auto 20px}
+.ol{width:60px;height:1px;background:var(--gold);opacity:.5}
+.od{width:5px;height:5px;background:var(--gold);transform:rotate(45deg)}
+.qattr{font-size:.58rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold)}
+
+/* contact */
+.contact{background:var(--dark);padding:100px 64px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,3.2rem);font-weight:300;color:#fff;line-height:1.2;margin-bottom:12px}
+.contact h2 em{font-style:italic;color:var(--gold)}
+.contact-sub{font-size:.72rem;color:var(--mid);line-height:1.9;max-width:340px}
+.card{border:1px solid rgba(184,149,90,.2);padding:44px;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%;background:var(--gold)}
+.ci{margin-bottom:32px}
+.ci:last-child{margin-bottom:0}
+.ci-label{font-size:.55rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.ci-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#fff;font-weight:300;text-decoration:none;display:block;transition:color .25s}
+.ci-val:hover{color:var(--gold)}
+.ci-sub{font-size:.65rem;color:var(--mid);margin-top:3px}
+.btn{display:inline-flex;align-items:center;gap:14px;margin-top:40px;padding:14px 32px;background:var(--gold);color:var(--dark);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;font-weight:500;font-family:'Montserrat',sans-serif;text-decoration:none;transition:opacity .25s}
+.btn:hover{opacity:.85}
+
+/* footer */
+footer{background:var(--dark);border-top:1px solid rgba(255,255,255,.06);padding:32px 64px;display:flex;align-items:center;justify-content:space-between}
+.fl{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--mid);letter-spacing:.1em}
+.fr{font-size:.55rem;color:#3A3530;letter-spacing:.18em;text-transform:uppercase}
+
+/* scroll reveal */
+.r{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}
+.r.v{opacity:1;transform:translateY(0)}
+.r2{transition-delay:.15s}
+.r3{transition-delay:.28s}
+
+@keyframes up{to{opacity:1;transform:none}}
+
+@media(max-width:860px){
+  nav,nav.s{padding:18px 24px}
+  .hero-body{padding:0 24px 56px}
+  .grid2{grid-template-columns:1fr}
+  .about-copy{padding:56px 24px}
+  .gallery{grid-template-columns:1fr;grid-template-rows:auto;height:auto}
+  .gcard:first-child{grid-row:auto}
+  .gcard img,.gcard{min-height:260px}
+  .gtag{opacity:1;transform:none}
+  .contact{grid-template-columns:1fr;padding:72px 24px;gap:48px}
+  .card{padding:28px 20px}
+  .quote-wrap{padding:80px 24px}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:28px 24px}
+}
+</style>
+</head>
+<body>
+
+<div class="c" id="C"></div>
+<div class="cr" id="CR"></div>
+
+<nav id="nav">
+  <a href="#" class="nl">Vinícius Florêncio</a>
+  <a href="https://wa.me/5547984888745" class="nc" target="_blank">Agendar visita</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <img src="/mnt/user-data/uploads/IMG_2250.JPG" alt="Balneário Camboriú" onerror="this.style.display='none'"/>
+  <div class="hero-veil"></div>
+  <div class="hero-body">
+    <p class="eyebrow">Balneário Camboriú · Praia Brava</p>
+    <h1>Ativos raros.<br><em>Decisões precisas.</em></h1>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <div class="strip-track">
+    <span class="strip-item">Balneário Camboriú</span>
+    <span class="strip-item">Praia Brava</span>
+    <span class="strip-item">Alto Padrão</span>
+    <span class="strip-item">FG Empreendimentos</span>
+    <span class="strip-item">Senna Tower</span>
+    <span class="strip-item">Santa Catarina</span>
+    <span class="strip-item">São Paulo</span>
+    <span class="strip-item">Balneário Camboriú</span>
+    <span class="strip-item">Praia Brava</span>
+    <span class="strip-item">Alto Padrão</span>
+    <span class="strip-item">FG Empreendimentos</span>
+    <span class="strip-item">Senna Tower</span>
+    <span class="strip-item">Santa Catarina</span>
+    <span class="strip-item">São Paulo</span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="grid2 about" id="sobre">
+  <div style="overflow:hidden;min-height:520px">
+    <img class="about-img" src="/mnt/user-data/uploads/_02_04_26_FG_Elite_Club41075.jpeg" alt="Vinícius Florêncio" onerror="this.style.background='#E2DDD7'"/>
+  </div>
+  <div class="about-copy">
+    <div class="label r">Sobre</div>
+    <h2 class="r r2">Curadoria restrita.<br><em>Visão de longo prazo.</em></h2>
+    <p class="r r3">Mais de 6 anos intermediando ativos de alto padrão entre Santa Catarina e São Paulo. Formação em Direito e MBA em Economia Financeira. Especialista em FG Empreendimentos.</p>
+    <div class="stats r">
+      <div class="stat">
+        <div class="sn">6+</div>
+        <div class="sl">Anos de<br>experiência</div>
+      </div>
+      <div class="stat">
+        <div class="sn">SC·SP</div>
+        <div class="sl">Presença<br>estratégica</div>
+      </div>
+      <div class="stat">
+        <div class="sn">FG</div>
+        <div class="sl">Corretor<br>especializado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div class="gallery" id="portfolio">
+  <div class="gcard">
+    <img src="/mnt/user-data/uploads/IMG_2250.JPG" alt="Balneário Camboriú" onerror="this.style.background='#2A2724'"/>
+    <div class="gtag">Vista Aérea · Balneário Camboriú</div>
+  </div>
+  <div class="gcard">
+    <img src="/mnt/user-data/uploads/IMG_2226.jpg" alt="Senna Tower" onerror="this.style.background='#2A2724'"/>
+    <div class="gtag">Senna Tower</div>
+  </div>
+  <div class="gcard">
+    <img src="/mnt/user-data/uploads/IMG_2237.JPG" alt="Vista do Alto" onerror="this.style.background='#2A2724'"/>
+    <div class="gtag">Vista Privilegiada</div>
+  </div>
+</div>
+
+<!-- QUOTE -->
+<section class="quote-wrap">
+  <blockquote class="quote r">"Você não está buscando um imóvel. Está acessando um ativo raro."</blockquote>
+  <div class="orn"><div class="ol"></div><div class="od"></div><div class="ol"></div></div>
+  <p class="qattr">Vinícius Florêncio</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contato">
+  <div class="r">
+    <div class="label">Contato</div>
+    <h2>Consulta<br><em>exclusiva</em></h2>
+    <p class="contact-sub">Atendimento com agendamento prévio. Acesso a oportunidades fora do mercado aberto.</p>
+    <a href="https://wa.me/5547984888745" class="btn" target="_blank">Falar no WhatsApp &nbsp;→</a>
+  </div>
+  <div class="card r r2">
+    <div class="ci">
+      <div class="ci-label">Telefone · WhatsApp</div>
+      <a href="https://wa.me/5547984888745" class="ci-val" target="_blank">(47) 98488-8745</a>
+      <div class="ci-sub">Agendamento prévio</div>
+    </div>
+    <div class="ci">
+      <div class="ci-label">Região de atuação</div>
+      <span class="ci-val" style="cursor:default">Balneário Camboriú · Praia Brava</span>
+      <div class="ci-sub">Santa Catarina e São Paulo</div>
+    </div>
+    <div class="ci">
+      <div class="ci-label">Especialização</div>
+      <span class="ci-val" style="cursor:default;font-size:1.1rem">FG Empreendimentos</span>
+      <div class="ci-sub">Alto padrão · Direito · MBA Economia Financeira</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="fl">Vinícius Florêncio</span>
+  <span class="fr">Corretor de Imóveis · Balneário Camboriú</span>
+</footer>
+
+<script>
+const C=document.getElementById('C'),CR=document.getElementById('CR');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;C.style.left=mx+'px';C.style.top=my+'px'});
+(function loop(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;CR.style.left=rx+'px';CR.style.top=ry+'px';requestAnimationFrame(loop)})();
+document.querySelectorAll('a').forEach(a=>{
+  a.addEventListener('mouseenter',()=>{CR.style.width='48px';CR.style.height='48px';CR.style.opacity='.8'});
+  a.addEventListener('mouseleave',()=>{CR.style.width='30px';CR.style.height='30px';CR.style.opacity='.5'});
+});
+
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('s',scrollY>60));
+
+const io=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('v')}),{threshold:.15});
+document.querySelectorAll('.r').forEach(el=>io.observe(el));
+
+window.addEventListener('scroll',()=>{
+  const hero=document.querySelector('.hero img');
+  if(hero&&scrollY<innerHeight)hero.style.transform=`translateY(${scrollY*.25}px)`;
+});
+</script>
+</body>
+</html>
